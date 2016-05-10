@@ -25,6 +25,7 @@ public class Cinema implements java.io.Serializable {
 	private int halls;
 	private String address;
 	private Set<Seans> seanses = new HashSet<Seans>(0);
+	private Set<Hall> hallSet = new HashSet<Hall>(0);
 
 	public Cinema() {
 	}
@@ -87,6 +88,15 @@ public class Cinema implements java.io.Serializable {
 
 	public void setSeanses(Set<Seans> seanses) {
 		this.seanses = seanses;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cinema")
+	public Set<Hall> getHallSet() {
+		return hallSet;
+	}
+
+	public void setHallSet(Set<Hall> hallSet) {
+		this.hallSet = hallSet;
 	}
 
 }

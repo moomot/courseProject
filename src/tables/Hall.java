@@ -8,6 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,6 +26,9 @@ public class Hall implements java.io.Serializable {
 	private int hallId;
 	private String name;
 	private int numberOfSeats;
+
+	private Cinema cinema;
+
 	private Set<Seans> seanses = new HashSet<Seans>(0);
 
 	public Hall() {
@@ -38,7 +44,14 @@ public class Hall implements java.io.Serializable {
 		this.numberOfSeats = numberOfSeats;
 		this.seanses = seanses;
 	}
+	
+	public Hall(String name, int numberOfSeats, Cinema cinema) {
+		this.name = name;
+		this.numberOfSeats = numberOfSeats;
+		this.cinema = cinema;
+	}
 
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "hall_id", unique = true, nullable = false)
@@ -75,6 +88,16 @@ public class Hall implements java.io.Serializable {
 
 	public void setSeanses(Set<Seans> seanses) {
 		this.seanses = seanses;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cinema_id", unique = true, nullable = false)
+	public Cinema getCinema() {
+		return cinema;
+	}
+
+	public void setCinema(Cinema cinema) {
+		this.cinema = cinema;
 	}
 
 }

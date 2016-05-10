@@ -5,9 +5,9 @@
   <% String url = request.getRequestURL().toString();
     String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
     %>
-  <div class="panel-body" style="padding-top:0; padding-bottom: 0;">
+  <div class="panel-body" style="padding-bottom: 0;">
    <form action="<%=baseURL %>admin/rest/cinema/add" method="post" accept-charset="utf-8" class="addForm">
-    <h3></h3>
+   
     <div>
     	<input type="text" class="form-control" required name="title" value="" placeholder="Название кинотеатра">
     </div>
