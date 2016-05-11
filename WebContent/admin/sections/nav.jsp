@@ -40,6 +40,14 @@
   </ul>
                 
                 </li>
+                <li><a href="#" class="dropdown-toggle" type="button" id="dropdownMenu5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Топы<span class="caret"></span></a>
+    
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu5">
+    <li><a href="<%=baseURL%>admin/top/rated">Топ 10 по рейтингу</a></li>
+    <li><a href="<%=baseURL%>admin/top/money">Топ 10 по кассовым сборам</a></li>
+  </ul>
+                
+                </li>
                
             </ul>
     </div>

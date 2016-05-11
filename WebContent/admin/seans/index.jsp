@@ -46,8 +46,7 @@
 				<td><%=seans.getCinema().getName()%></td>
 				<td><%=seans.getHall().getName()%></td>
 				<td><%=seans.getMovie().getName()%></td>
-				<td><%Date date = new Date ();
-				date.setTime((long)unix_time*1000);seans.getDatetime()%></td>
+				<td><%=seans.getDatetime()%></td>
 				<td><%=seans.getPrice()%></td>
 				<td><%=seans.getFreeSeats()%></td>
 				<td><%=seans.getOccupiedSeats()%></td>

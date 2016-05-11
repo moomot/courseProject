@@ -95,6 +95,24 @@
         <url-pattern>/admin/seans/add</url-pattern>
     </servlet-mapping>
     
+     <servlet>
+        <servlet-name>TopRated</servlet-name>
+        <servlet-class>servlets.admin.top.Rated</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TopRated</servlet-name>
+        <url-pattern>/admin/top/rated</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>TopMoney</servlet-name>
+        <servlet-class>servlets.admin.top.Money</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TopMoney</servlet-name>
+        <url-pattern>/admin/top/money</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>

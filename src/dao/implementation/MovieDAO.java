@@ -98,5 +98,38 @@ public class MovieDAO implements IMovieDAO {
 		}
 		
 	}
+	
+	public List<String> top10rated()
+	{
+		Session session = null;
+		List<String> list = null;
+		try {
+		session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		list = session.createSQLQuery("CALL ratingTop10Rat").list();
+		session.getTransaction().commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( session != null && session.isOpen() ) session.close();
+		}
+		return list;
+	}
+
+	public List<String> top10money() {
+		Session session = null;
+		List<String> list = null;
+		try {
+		session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		list = session.createSQLQuery("CALL ratingTop10Money").list();
+		session.getTransaction().commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( session != null && session.isOpen() ) session.close();
+		}
+		return list;
+	}
 
 }
