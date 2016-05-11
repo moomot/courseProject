@@ -6,6 +6,21 @@
 <div class="panel panel-default">
   <div class="panel-heading">Список залов</div>
   <div class="panel-body" style="padding-top:0; padding-bottom: 0;">
+   <div class="row" style="margin: 5px 0 0 5px;">
+     <div class="btn-group dropdown-list dropdown-list-table-hall" data-base="<%=baseURL %>" style="margin-bottom: 5px">
+    <input type="hidden" value="" name="cinemaId" /> 
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Выберите кинотеатр <span class="caret"></span></button>
+  <ul class="dropdown-menu" role="menu">
+    <%@ page import="java.util.*" import="java.io.*" import="tables.Cinema"%>
+	<%
+		List<Cinema> list1 = (List<Cinema>) request.getAttribute("cinemas");
+		for(Cinema cinema : list1) {
+			%>
+			<li data-id="<%=cinema.getCinemaId() %>"><a href="#"><%=cinema.getName() %></a></li>
+			<% } %>
+  </ul>
+</div>
+</div>
    <table class="table">
         <thead>
         <tr>

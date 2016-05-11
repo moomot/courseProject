@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import tables.Admin;
 import tables.Cinema;
+import tables.Hall;
 import tables.Movie;
 import util.HibernateUtil;
 import dao.IMovieDAO;
@@ -76,6 +77,26 @@ public class MovieDAO implements IMovieDAO {
 			if ( session != null && session.isOpen() ) session.close();
 		}
 		return movies;
+	}
+
+	public void removeMovieById(int id) {
+		Session session = null;
+		try {
+		session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Movie movie = session.get(Movie.class, id);
+		if (movie == null) {
+			session.getTransaction().rollback();
+			return;
+		}
+		session.delete(movie);
+		session.getTransaction().commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( session != null && session.isOpen() ) session.close();
+		}
+		
 	}
 
 }

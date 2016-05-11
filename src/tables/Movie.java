@@ -101,6 +101,18 @@ public class Movie implements java.io.Serializable {
 		this.movieId = movieId;
 	}
 
+	public Movie(String name, String description, String duration,
+			String earned_money, String producer, String genres, int rating) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.duration = duration;
+		this.earned_money = earned_money;
+		this.producer = producer;
+		this.genres = genres;
+		this.rating = rating;
+	}
+
 	@Column(name = "name", nullable = false, length = 50)
 	public String getName() {
 		return this.name;

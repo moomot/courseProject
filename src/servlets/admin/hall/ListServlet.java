@@ -26,6 +26,13 @@ public class ListServlet extends HttpServlet{
 			throws ServletException, IOException {
 		if(Session.isAdmin(request, response)) {
 			Factory factory = Factory.getInstance();
+			CinemaDAO cinemaDAO = factory.getCinemaDAO();
+			try {
+				request.setAttribute("cinemas", cinemaDAO.getCinemas());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			HallDAO hallDAO = factory.getHallDAO();
 			try {
 				List<Hall> list = hallDAO.getHalls();

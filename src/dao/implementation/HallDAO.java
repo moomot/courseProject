@@ -77,5 +77,25 @@ public class HallDAO implements IHallDAO {
 		}
 		return halls;
 	}
+	
+	public void removeHallById(int id) {
+		Session session = null;
+		try {
+		session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Hall hall = session.get(Hall.class, id);
+		if (hall == null) {
+			session.getTransaction().rollback();
+			return;
+		}
+		session.delete(hall);
+		session.getTransaction().commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if ( session != null && session.isOpen() ) session.close();
+		}
+		
+	}
 
 }

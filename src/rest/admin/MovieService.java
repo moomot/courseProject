@@ -2,6 +2,7 @@ package rest.admin;
 
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import general.Factory;
@@ -22,37 +23,38 @@ import org.hibernate.SessionFactory;
 import dao.implementation.AdminDAO;
 import dao.implementation.CinemaDAO;
 import dao.implementation.HallDAO;
+import dao.implementation.MovieDAO;
 
 import tables.Cinema;
 import tables.Hall;
+import tables.Movie;
 
-@Path("/hall")
-public class HallService {
+@Path("/movie")
+public class MovieService {
 	
 	@Path("/add")
 	@POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public String add(@FormParam("name") String name,
-            @FormParam("number_of_seats") String number_of_seats,
-            @FormParam("cinemaId") String cinemaId)
+            @FormParam("description") String description,
+            @FormParam("duration") String duration,
+            @FormParam("earned_money") String earned_money,
+            @FormParam("producer") String producer,
+            @FormParam("genres") String genres,
+            @FormParam("rating") String rating)
 	{
 	
 		Factory factory = Factory.getInstance();
-		CinemaDAO cinemaDAO = factory.getCinemaDAO();
-		Hall hall = null;
+		MovieDAO movieDAO = factory.getMovieDAO();
+		Movie movie = null;
 		try {
-			hall = new Hall(name, Integer.parseInt(number_of_seats), cinemaDAO.getCinema(Integer.parseInt(cinemaId)));
+			movie = new Movie(name, description, duration, earned_money, producer, genres, Integer.parseInt(rating));
 		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-
-		HallDAO hallDAO = factory.getHallDAO();
 		try {
-			hallDAO.addHall(hall);
+			movieDAO.addMovie(movie);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Ошибка при добавлении";
@@ -65,30 +67,29 @@ public class HallService {
 	public String remove(@PathParam("id") int id)
 	{
 		Factory factory = Factory.getInstance();
-		HallDAO hallDAO = factory.getHallDAO();
-		hallDAO.removeHallById(id);
+		MovieDAO movieDAO = factory.getMovieDAO();
+		movieDAO.removeMovieById(id);
 		return "Успешно удалено!";
 	}
 	
-	@Path("/getHalls/{cinemaID}")
+	@Path("/getMovies")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@GET
-	public Set<Hall> getHalls(@PathParam("cinemaID") int cinemaID)
+	public List<Movie> getMovies()
 	{
 		Factory factory = Factory.getInstance();
-		CinemaDAO cinemaDAO = factory.getCinemaDAO();
-		Set<Hall> halls = null;
+		MovieDAO movieDAO = factory.getMovieDAO();
+		List<Movie> movies = null;
 		try {
-			halls = cinemaDAO.getCinema(cinemaID).getHallSet();
-			for (Iterator iterator = halls.iterator(); iterator.hasNext();) {
-				Hall hall = (Hall) iterator.next();
-				hall.setSeanses(null);
-				hall.setCinema(null);
+			movies = movieDAO.getMovies();
+			for (Iterator iterator = movies.iterator(); iterator.hasNext();) {
+				Movie movie = (Movie) iterator.next();
+				movie.setSeanses(null);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return halls;
+		return movies;
 	}
 }
