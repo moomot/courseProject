@@ -19,7 +19,7 @@
 		for(String movie : list) {
 			%>
 			<tr>
-				<td><%=movie%></td>
+				<td><%=movie%></td> 
 			</tr> 
 			<%
 		}
